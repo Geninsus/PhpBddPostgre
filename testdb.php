@@ -111,6 +111,7 @@
    }
    pg_free_result($res);
    echo pg_last_error($db);
+   pg_close($db);
    }
 
 ?>
