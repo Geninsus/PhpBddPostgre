@@ -14,14 +14,66 @@
       </TR> 
       <TR> 
          <TD>
-               <input type="checkbox"  name="select[]" value="reference_piece">Ref Piece</input></br>
-               <input type="checkbox"  name="select[]" value="raison_sociale">Raison sociale</input></br>
+            
+            <input type="checkbox"  name="from[]" value="fournisseur">Fournisseur</input></br>
          </TD> 
          <TD> 
-               <input type="checkbox"  name="from[]" value="fournisseur">Fournisseur</input></br>
-               <input type="checkbox"  name="from[]" value="piece">Piece</input></br> 
+			<input type="checkbox"  name="select[]" value="raison_sociale">Raison Sociale</input></br>
+            <input type="checkbox"  name="select[]" value="nom_directeur">Nom du Directeur</input></br>    
          </TD> 
-      </TR> 
+      </TR>
+      <tr>
+      	<td>
+      		<input type="checkbox"  name="from[]" value="piece">Piece</input></br> 
+      	</td>
+      	<td>
+      		<input type="checkbox"  name="select[]" value="reference_piece">Reference Piece</input></br>
+      		<input type="checkbox"  name="select[]" value="reference_commande">Reference Commande</input></br>
+      		<input type="checkbox"  name="select[]" value="numero_ligne_commande">Numero Ligne De COmmande</input></br>
+      		<input type="checkbox"  name="select[]" value="reference_type_piece">Reference Type Piece</input></br> 
+      	</td>
+      </tr>
+      <tr>
+      	<td>
+      		<input type="checkbox"  name="from[]" value="ligne_commande">Ligne Commande</input></br> 
+      	</td>
+      	<td>
+      		<input type="checkbox"  name="select[]" value="reference_commande">Reference Commande</input></br>
+      		<input type="checkbox"  name="select[]" value="numero_ligne_commande">Numero Ligne De COmmande</input></br>
+      		<input type="checkbox"  name="select[]" value="reference_type_piece">Reference Type Piece</input></br> 
+      		<input type="checkbox"  name="select[]" value="quantites_pieces_commandees">Quantité Pièces Commandées</input></br>
+      		<input type="checkbox"  name="select[]" value="prix_piece">Prix Pièce</input></br> 
+      	</td>
+      </tr>
+      <tr>
+      	<td>
+      		<input type="checkbox"  name="from[]" value="commande">Commande</input></br>
+      	</td>
+      	<td>
+      		<input type="checkbox"  name="select[]" value="reference_commande">Reference Commande</input></br>
+      		<input type="checkbox"  name="select[]" value="raison_sociale">Raison Sociale</input></br>
+      		<input type="checkbox"  name="select[]" value="date_commande">Date Commande</input></br>
+      		<input type="checkbox"  name="select[]" value="date_livraison_souhaitee">Date Livraison Souhaitée</input></br>
+      	</td>
+      </tr>
+      <tr>
+      	<td>
+      		<input type="checkbox"  name="from[]" value="type_piece">Type Piece</input></br>
+      	</td>
+      	<td>
+      		<input type="checkbox"  name="select[]" value="reference_type_piece">Reference Type Piece</input></br>
+      		<input type="checkbox"  name="select[]" value="libelle_type_piece">Libelle Type Piece</input></br>
+      	</td>
+      </tr>
+      <tr>
+      	<td>
+      		<input type="checkbox"  name="from[]" value="commercialiser">Commercialiser</input></br>
+      	</td>
+      	<td>
+      		<input type="checkbox"  name="select[]" value="raison_sociale">Raison Sociale</input></br>
+      		<input type="checkbox"  name="select[]" value="reference_type_piece">Reference Type Piece</input></br> 
+      	</td>
+      </tr>
 </TABLE> 
 
 
@@ -47,6 +99,7 @@
       }
    }
    }
+   echo pg_last_error($db);
 
 ?>
 
