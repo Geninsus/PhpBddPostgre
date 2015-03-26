@@ -1,8 +1,5 @@
 <?php
 session_start();
-unset($_SESSION['val']);
-unset($_SESSION['value']);
-unset($_SESSION['Nbr']);
 
 ?>
 <!DOCTYPE HTML>
@@ -33,18 +30,26 @@ Entrez le nombre de résultat souhaité : <input type="text" name="Nbr"/>
 <button type="submit">Valide</button>
 </br>
 
-<?php
-$db = pg_connect("dbname=cyclesISEN host=localhost user=guillaumecourmont");
-if(!$db){
-	echo "Probléme" . "</br>";
-}
-if (isset($_POST['Nbr'])) {
-   	$Nbr = $_POST['Nbr'];
-   }
-if (isset($_POST['select']) and isset($Nbr)) {
-	$tri = $_POST['select'];
-      
-?>
+  <?php
+    $db = pg_connect("dbname=cyclesISEN host=localhost user=guillaumecourmont");
+    if(!$db){
+	   echo "Probléme" . "</br>";
+    }
+    if (isset($_GET['stop'])) {
+            if (isset($stop)) {
+                $stop = $stop + $stop;
+            }else{
+            $stop = $Nbr;
+            }
+        }else{
+            $stop = 0;
+        }
+    if (isset($_POST['Nbr'])) {
+   	  $Nbr = $_POST['Nbr'];
+    }
+    if (isset($_POST['select']) and isset($Nbr)) {
+	   $tri = $_POST['select'];
+  ?>
 
 <form> 
 
@@ -57,22 +62,21 @@ if (isset($_POST['select']) and isset($Nbr)) {
 	</tr>
 	<tr>
 		<td>
-		<?php 
-		 $res = pg_query("SELECT reference_commande FROM commande ORDER BY $tri");
-         $row = pg_num_rows($res);
+		<?php
+		$res = pg_query("SELECT reference_commande FROM commande ORDER BY $tri LIMIT $Nbr OFFSET $stop");
+        $row = pg_num_rows($res);
 
          	if ($Nbr>$row) {$Nbr=$row;}
 
          	for($i=0;$i<$Nbr;$i++){
             	$val=pg_fetch_result($res, $i, 0);
-            	$_SESSION['val']=$val;
-            	 ?><a href='pagedetailcommande.php'><?php echo $val."</br>";?></a>
+            	 ?><a href='pagedetailcommande.php?value='$i''><?php echo $val."</br>";?></a>
             <?php } ?>
 		
         </td>		
 		<td>
 		<?php 
-		 $res = pg_query("SELECT raison_sociale FROM commande ORDER BY $tri");
+		 $res = pg_query("SELECT raison_sociale FROM commande ORDER BY $tri LIMIT $Nbr OFFSET $stop");
          $row = pg_num_rows($res);
 
          	if ($Nbr>$row) {$Nbr=$row;}
@@ -85,7 +89,7 @@ if (isset($_POST['select']) and isset($Nbr)) {
 		</td>	
 		<td>
 		<?php 
-         $res = pg_query("SELECT date_commande FROM commande ORDER BY $tri");
+         $res = pg_query("SELECT date_commande FROM commande ORDER BY $tri LIMIT $Nbr OFFSET $stop");
          $row = pg_num_rows($res);
 
          	if ($Nbr>$row) {$Nbr=$row;}
@@ -98,7 +102,7 @@ if (isset($_POST['select']) and isset($Nbr)) {
 		</td>
 		<td>
 		<?php
-         $res = pg_query("SELECT date_livraison_souhaitee FROM commande ORDER BY $tri");
+         $res = pg_query("SELECT date_livraison_souhaitee FROM commande ORDER BY $tri LIMIT $Nbr OFFSET $stop");
          $row = pg_num_rows($res);
 
          	if ($Nbr>$row) {$Nbr=$row;}
@@ -111,6 +115,8 @@ if (isset($_POST['select']) and isset($Nbr)) {
 		</td>
 	</tr>
 </table>
+
+<button type="submit" name="stop">Suivante</button>
 
 <?php		
 }

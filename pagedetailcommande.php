@@ -1,9 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['val'])) {
-	$_SESSION['value']=$_SESSION['val'];
-	unset($_SESSION['val']);
-}
+
 ?>
 <!DOCTYPE HTML>
 <html lang="fr" xmlns="http://www.w3.org/1999/xhtml">
@@ -13,9 +10,8 @@ if (isset($_SESSION['val'])) {
 </head>
 <body>
 <?php
-if (isset($_SESSION['value'])) {
-	displayCommande($_SESSION['value']);
-}
+echo $_GET['value'];
+
 ?>
 <a href="pagecommande.php">Acceuil</a></br>
 <?php
@@ -41,7 +37,7 @@ function displayCommande($val){
 	</table>
 </form>
 <?php } 
-unset($_SESSION['value']);
+
 ?>
 </body>
 </html>
